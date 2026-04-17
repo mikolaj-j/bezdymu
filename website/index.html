@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BezDymu — Twoje ciało się regeneruje</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --green-50: #f0fdf4;
+      --green-100: #dcfce7;
+      --green-200: #bbf7d0;
+      --green-400: #4ade80;
+      --green-500: #22c55e;
+      --green-600: #16a34a;
+      --green-700: #15803d;
+      --green-800: #166534;
+      --green-900: #14532d;
+      --slate-50: #f8fafc;
+      --slate-100: #f1f5f9;
+      --slate-200: #e2e8f0;
+      --slate-300: #cbd5e1;
+      --slate-400: #94a3b8;
+      --slate-500: #64748b;
+      --slate-600: #475569;
+      --slate-700: #334155;
+      --slate-800: #1e293b;
+      --slate-900: #0f172a;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--slate-900);
+      color: var(--slate-100);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── Hero ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      position: relative;
+      background: radial-gradient(ellipse at 50% 0%, rgba(22,163,74,0.15) 0%, transparent 60%),
+                  var(--slate-900);
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2322c55e' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='1.5'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+    }
+
+    .logo {
+      margin-bottom: 2.5rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .logo-text {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3em;
+      font-size: clamp(2.2rem, 7vw, 4rem);
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .logo-bez {
+      position: relative;
+      display: inline-block;
+    }
+
+    .logo-bez::after {
+      content: '';
+      position: absolute;
+      left: -0.05em;
+      right: -0.05em;
+      top: 50%;
+      height: 3px;
+      background: #fff;
+      transform: translateY(-50%);
+    }
+
+    .logo-smoke {
+      position: absolute;
+      top: -0.5em;
+      left: -0.15em;
+      width: 0.6em;
+      height: 0.8em;
+      opacity: 0.5;
+    }
+
+    .logo-smoke path {
+      fill: none;
+      stroke: #ccc;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, #fff 0%, var(--green-200) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--slate-400);
+      max-width: 520px;
+      margin: 0 auto 3rem;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--slate-500);
+      font-size: 0.85rem;
+      animation: bounce 2s infinite;
+    }
+
+    .scroll-hint svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--slate-500);
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ─── Timeline section ─── */
+    .timeline-section {
+      padding: 6rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--slate-400);
+      font-size: 1.1rem;
+      margin-bottom: 4rem;
+      max-width: 550px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ─── Timeline ─── */
+    .timeline {
+      position: relative;
+      padding-left: 3rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0.75rem;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--green-500), var(--green-700), transparent);
+    }
+
+    .milestone {
+      position: relative;
+      margin-bottom: 3rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .milestone.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .milestone-dot {
+      position: absolute;
+      left: -2.4rem;
+      top: 0.35rem;
+      width: 1.2rem;
+      height: 1.2rem;
+      border-radius: 50%;
+      background: var(--green-500);
+      border: 3px solid var(--slate-900);
+      box-shadow: 0 0 0 3px rgba(34,197,94,0.2);
+      z-index: 1;
+    }
+
+    .milestone-icon {
+      font-size: 2.2rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .milestone-icon .icon-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--slate-500);
+      background: var(--slate-800);
+      padding: 0.2rem 0.6rem;
+      border-radius: 2rem;
+    }
+
+    .milestone-time {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--green-400);
+      margin-bottom: 0.4rem;
+    }
+
+    .milestone-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
+
+    .milestone-body {
+      color: var(--slate-300);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .milestone-organs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .organ-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.25rem 0.65rem;
+      border-radius: 2rem;
+      background: rgba(34,197,94,0.1);
+      color: var(--green-400);
+      border: 1px solid rgba(34,197,94,0.15);
+    }
+
+    .milestone-card {
+      background: linear-gradient(135deg, rgba(34,197,94,0.05) 0%, rgba(34,197,94,0.01) 100%);
+      border: 1px solid rgba(34,197,94,0.1);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      transition: border-color 0.3s, background 0.3s;
+    }
+
+    .milestone-card:hover {
+      border-color: rgba(34,197,94,0.25);
+      background: linear-gradient(135deg, rgba(34,197,94,0.08) 0%, rgba(34,197,94,0.02) 100%);
+    }
+
+    .milestone-progress {
+      margin-top: 1rem;
+      height: 4px;
+      background: var(--slate-700);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .milestone-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--green-500), var(--green-400));
+      border-radius: 2px;
+      transition: width 1s ease;
+    }
+
+    /* ─── Calculator section ─── */
+    .calculator-section {
+      padding: 6rem 2rem;
+      background: radial-gradient(ellipse at 50% 100%, rgba(22,163,74,0.1) 0%, transparent 60%);
+    }
+
+    .calculator-container {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .input-group label {
+      font-size: 1.1rem;
+      color: var(--slate-300);
+    }
+
+    .date-input-wrapper {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .date-input-wrapper input,
+    .date-input-wrapper select {
+      background: var(--slate-800);
+      border: 2px solid var(--slate-700);
+      border-radius: 0.75rem;
+      color: #fff;
+      font-size: 1.1rem;
+      padding: 0.8rem 1.2rem;
+      font-family: inherit;
+      transition: border-color 0.3s;
+      outline: none;
+    }
+
+    .date-input-wrapper input:focus,
+    .date-input-wrapper select:focus {
+      border-color: var(--green-500);
+    }
+
+    .date-input-wrapper input[type="date"] {
+      min-width: 200px;
+    }
+
+    .date-input-wrapper input[type="time"] {
+      min-width: 140px;
+    }
+
+    .calc-button {
+      background: linear-gradient(135deg, var(--green-600), var(--green-700));
+      color: #fff;
+      border: none;
+      padding: 1rem 2.5rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: 0.75rem;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      font-family: inherit;
+    }
+
+    .calc-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(34,197,94,0.3);
+    }
+
+    .calc-button:active {
+      transform: translateY(0);
+    }
+
+    /* ─── Results ─── */
+    .results {
+      margin-top: 3rem;
+    }
+
+    .results-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .results-header .big-time {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--green-400), #fff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .results-header .subtitle {
+      color: var(--slate-400);
+      font-size: 1rem;
+      margin-top: 0.3rem;
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    .result-card {
+      background: var(--slate-800);
+      border: 1px solid var(--slate-700);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      transition: all 0.4s ease;
+      opacity: 0;
+      transform: translateY(20px) scale(0.97);
+    }
+
+    .result-card.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .result-card.achieved {
+      border-color: var(--green-600);
+      background: linear-gradient(135deg, rgba(34,197,94,0.1) 0%, var(--slate-800) 100%);
+    }
+
+    .result-card.upcoming {
+      border-color: var(--slate-600);
+      opacity: 0.6;
+    }
+
+    .result-card.upcoming.show {
+      opacity: 0.55;
+    }
+
+    .result-icon {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .result-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+
+    .result-card.achieved .result-label {
+      color: var(--green-400);
+    }
+
+    .result-card.upcoming .result-label {
+      color: var(--slate-500);
+    }
+
+    .result-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.4rem;
+    }
+
+    .result-desc {
+      font-size: 0.9rem;
+      color: var(--slate-300);
+      line-height: 1.6;
+    }
+
+    .result-card.upcoming .result-title,
+    .result-card.upcoming .result-desc {
+      color: var(--slate-400);
+    }
+
+    .result-countdown {
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--slate-500);
+    }
+
+    .result-badge {
+      display: inline-block;
+      margin-top: 0.75rem;
+      padding: 0.25rem 0.75rem;
+      background: rgba(34,197,94,0.15);
+      border-radius: 2rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--green-400);
+    }
+
+    /* ─── Encouragement ─── */
+    .encouragement {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 2rem;
+      background: linear-gradient(135deg, rgba(34,197,94,0.08), rgba(34,197,94,0.02));
+      border: 1px solid rgba(34,197,94,0.15);
+      border-radius: 1.5rem;
+    }
+
+    .encouragement-text {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+
+    .encouragement-sub {
+      color: var(--slate-400);
+      font-size: 0.95rem;
+    }
+
+    /* ─── Stats bar ─── */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      background: var(--slate-800);
+      border-radius: 1rem;
+      border: 1px solid var(--slate-700);
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--green-400);
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--slate-400);
+      margin-top: 0.3rem;
+    }
+
+    /* ─── Footer ─── */
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      color: var(--slate-600);
+      font-size: 0.85rem;
+    }
+
+    footer a {
+      color: var(--green-500);
+      text-decoration: none;
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 600px) {
+      .timeline { padding-left: 2.2rem; }
+      .milestone-dot { left: -1.65rem; width: 1rem; height: 1rem; }
+      .milestone-card { padding: 1rem; }
+      .results-grid { grid-template-columns: 1fr; }
+      .date-input-wrapper { flex-direction: column; align-items: stretch; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="logo">
+        <div class="logo-text">
+          <span class="logo-bez">
+            <svg class="logo-smoke" viewBox="0 0 20 28" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 26 C8 20, 14 18, 11 12 C8 6, 13 3, 11 0"/>
+            </svg>
+            BEZ
+          </span>
+          <span>DYMU</span>
+        </div>
+      </div>
+      <h1>Twoje ciało zaczyna się leczyć od pierwszej minuty</h1>
+      <p>Rzucenie palenia to najlepsza decyzja, jaką możesz podjąć dla swojego zdrowia. Zobacz, co dzieje się w Twoim organizmie, kiedy gasisz ostatniego papierosa.</p>
+    </div>
+    <div class="scroll-hint">
+      <span>Przewiń w dół</span>
+      <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
+    </div>
+  </section>
+
+  <!-- ═══ TIMELINE ═══ -->
+  <section class="timeline-section">
+    <h2 class="section-title">Co się dzieje, kiedy rzucasz palenie?</h2>
+    <p class="section-subtitle">Twój organizm zaczyna się regenerować niemal natychmiast. Każda minuta bez papierosa to krok ku zdrowiu.</p>
+
+    <div class="timeline" id="timeline">
+
+      <div class="milestone">
+        <div class="milestone-dot"></div>
+        <div class="milestone-card">
+          <div class="milestone-icon">💓 <span class="icon-label">Układ krążenia</span></div>
+          <div class="milestone-time">Po 20 minutach</div>
+          <div class="milestone-title">Serce zwalnia, ciśnienie spada</div>
+          <div class="milestone-body">Twoje tętno i ciśnienie krwi wracają do normy. Krążenie w dłoniach i stopach się poprawia — możesz poczuć ciepło w koniuszkach palców. To pierwszy sygnał, że ciało już pracuje na Twoją korzyść.</div>
+          <div class="milestone-organs">
+            <span class="organ-tag">❤️ Serce</span>
+            <span class="organ-tag">🩸 Ciśnienie</span>
+          </div>
+          <div class="milestone-progress"><div class="milestone-progress-bar" style="width: 8%"></div></div>
+        </div>
+      </div>
+
+      <div class="milestone">
+        <div class="milestone-dot"></div>
+        <div class="milestone-card">
+          <div class="milestone-icon">🫁 <span class="icon-label">Krew i tlen</span></div>
+          <div class="milestone-time">Po 8 godzinach</div>
+          <div class="milestone-title">Tlen wraca do gry</div>
+          <div class="milestone-body">Poziom tlenku węgla we krwi spada o połowę, a poziom tlenu wraca do normy. Twoje organy w końcu dostają tyle tlenu, ile potrzebują. Możesz poczuć się bardziej przytomnie i mieć więcej energii.</div>
+          <div class="milestone-organs">
+            <span class="organ-tag">🩸 Krew</span>
+            <span class="organ-tag">🧠 Mózg</span>
+            <span class="organ-tag">⚡ Energia</span>
+          </div>
+          <div class="milestone-progress"><div class="milestone-progress-bar" style="width: 14%"></div></div>
+        </div>
+      </div>
+
+      <div class="milestone">
+        <div class="milestone-dot"></div>
+        <div class="milestone-card">
+          <div class="milestone-icon">❤️ <span class="icon-label">Serce i płuca</span></div>
+          <div class="milestone-time">Po 24 godzinach</div>
+          <div class="milestone-title">Serce oddycha z ulgą</div>
+          <div class="milestone-body">Tlenek węgla jest całkowicie usunięty z organizmu. Ryzyko zawału serca zaczyna spadać. Twoje płuca zaczynają oczyszczać się ze śluzu i resztek dymu — to może powodować kaszel, ale to dobry znak!</div>
+          <div class="milestone-organs">
+            <span class="organ-tag">❤️ Serce</span>
+            <span class="organ-tag">🫁 Płuca</span>
+          </div>
+          <div class="milestone-progress"><div class="milestone-progress-bar" style="width: 20%"></div></div>
+        </div>
+      </div>
+
+      <div class="milestone">
+        <div class="milestone-dot"></div>
+        <div class="milestone-card">
+          <div class="milestone-icon">👃 <span class="icon-label">Zmysły</span></div>
+          <div class="milestone-time">Po 48 godzinach</div>
+          <div class="milestone-title">Świat nabiera smaku i zapachu</div>
+          <div class="milestone-body">Zakończenia nerwowe w nosie i ustach zaczynają się odradzać. Smaki stają się wyraźniejsze, zapachy intensywniejsze. Kawa smakuje lepiej, jedzenie nabiera nowych wymiarów. Twoje ciało pozbywa się nikotyny.</div>
+          <div class="milestone-organs">
+            <span class="organ-tag">👃 Nos</span>
+            <span class="organ-tag">👅 Język</span>
+            <span class="organ-tag">🧬 Nerwy</span>
+          </div>
+          <div class="milestone-progress"><div class="milestone-progress-bar" style="width: 28%"></div></div>
+        </div>
+      </div>
+
+      <div class="milestone">
+        <div class="milestone-dot"></div>
+        <div class="milestone-card">
+          <div class="milestone-icon">🌬️ <span class="icon-label">Układ oddechowy</span></div>
+          <div class="milestone-time">Po 72 godzinach</div>
+          <div class="milestone-title">Oddychasz pełną piersią</div>
+          <div class="milestone-body">Oskrzela rozluźniają się i rozszerzają. Oddychanie staje się łatwiejsze, a pojemność płuc rośnie. Możesz zauważyć, że wchodzenie po schodach nie męczy Cię tak jak wcześniej. Energia wraca!</div>
+          <div class="milestone-organs">
+            <span class="organ-tag">🫁 Oskrzela</span>
+            <span class="organ-tag">💨 Pojemność płuc</span>
+          </div>
+          <div class="milestone-progress"><div class="milestone-progress-bar" style="width: 35%"></div></div>
+        </div>
+      </div>
+
+      <div class="milestone">
+        <div class="milestone-dot"></div>
+        <div class="milestone-card">
+          <div class="milestone-icon">🏃 <span class="icon-label">Kondycja fizyczna</span></div>
+          <div class="milestone-time">Po 2 tygodniach</div>
+          <div class="milestone-title">Krążenie się poprawia</div>
+          <div class="milestone-body">Układ krążenia zaczyna działać sprawniej. Chodzenie i bieganie staje się łatwiejsze. Skóra odzyskuje zdrowy koloryt, bo dociera do niej więcej tlenu. Rany goją się szybciej.</div>
+          <div class="milestone-organs">
+            <span class="organ-tag">🩸 Krążenie</span>
+            <span class="organ-tag">✨ Skóra</span>
+            <span class="organ-tag">🏃 Kondycja</span>
+          </div>
+          <div class="milestone-progress"><div class="milestone-progress-bar" style="width: 45%"></div></div>
+        </div>
+      </div>
+
+      <div class="milestone">
+        <div class="milestone-dot"></div>
+        <div class="milestone-card">
+          <div class="milestone-icon">💪 <span class="icon-label">Regeneracja płuc</span></div>
+          <div class="milestone-time">Po 1–3 miesiącach</div>
+          <div class="milestone-title">Płuca odzyskują siłę</div>
+          <div class="milestone-body">Funkcja płuc poprawia się nawet o 30%. Rzęski w drogach oddechowych odradzają się i znów skutecznie oczyszczają płuca z zanieczyszczeń. Kaszel i duszność ustępują. Masz więcej tchu na aktywność fizyczną.</div>
+          <div class="milestone-organs">
+            <span class="organ-tag">🫁 Płuca +30%</span>
+            <span class="organ-tag">🧬 Rzęski</span>
+          </div>
+          <div class="milestone-progress"><div class="milestone-progress-bar" style="width: 55%"></div></div>
+        </div>
+      </div>
+
+      <div class="milestone">
+        <div class="milestone-dot"></div>
+        <div class="milestone-card">
+          <div class="milestone-icon">🛡️ <span class="icon-label">Odporność</span></div>
+          <div class="milestone-time">Po 9 miesiącach</div>
+          <div class="milestone-title">Koniec z porannym kaszlem</div>
+          <div class="milestone-body">Płuca są znacząco odbudowane. Kaszel palacza znika, oddech jest czysty i głęboki. Twoja odporność wraca do normy — przeziębienia i infekcje zdarzają się rzadziej. Czujesz się jakbyś nigdy nie palił.</div>
+          <div class="milestone-organs">
+            <span class="organ-tag">🫁 Płuca</span>
+            <span class="organ-tag">🛡️ Odporność</span>
+          </div>
+          <div class="milestone-progress"><div class="milestone-progress-bar" style="width: 65%"></div></div>
+        </div>
+      </div>
+
+      <div class="milestone">
+        <div class="milestone-dot"></div>
+        <div class="milestone-card">
+          <div class="milestone-icon">🎉 <span class="icon-label">Kamień milowy</span></div>
+          <div class="milestone-time">Po 1 roku</div>
+          <div class="milestone-title">Ryzyko chorób serca spada o połowę</div>
+          <div class="milestone-body">Ryzyko choroby wieńcowej jest teraz o 50% niższe niż u osoby palącej. To ogromny kamień milowy! Twoje naczynia krwionośne są zdrowsze, serce pracuje sprawniej. Jesteś w połowie drogi do serca niepalącego.</div>
+          <div class="milestone-organs">
+            <span class="organ-tag">❤️ Serce −50% ryzyka</span>
+            <span class="organ-tag">🩸 Naczynia</span>
+          </div>
+          <div class="milestone-progress"><div class="milestone-progress-bar" style="width: 75%"></div></div>
+        </div>
+      </div>
+
+      <div class="milestone">
+        <div class="milestone-dot"></div>
+        <div class="milestone-card">
+          <div class="milestone-icon">⭐ <span class="icon-label">Mózg i naczynia</span></div>
+          <div class="milestone-time">Po 5 latach</div>
+          <div class="milestone-title">Udar? Takie samo ryzyko jak u niepalącego</div>
+          <div class="milestone-body">Ryzyko udaru mózgu spada do poziomu osoby, która nigdy nie paliła. Naczynia krwionośne, które były zwężone i uszkodzone, stopniowo się rozszerzają i wracają do normalnej funkcji. Twoje ciało naprawdę się zregenerowało.</div>
+          <div class="milestone-organs">
+            <span class="organ-tag">🧠 Mózg</span>
+            <span class="organ-tag">🩸 Naczynia</span>
+          </div>
+          <div class="milestone-progress"><div class="milestone-progress-bar" style="width: 85%"></div></div>
+        </div>
+      </div>
+
+      <div class="milestone">
+        <div class="milestone-dot"></div>
+        <div class="milestone-card">
+          <div class="milestone-icon">🏆 <span class="icon-label">Ochrona przed rakiem</span></div>
+          <div class="milestone-time">Po 10 latach</div>
+          <div class="milestone-title">Rak płuc? Ryzyko spada o połowę</div>
+          <div class="milestone-body">Ryzyko raka płuc jest teraz o 50% mniejsze niż u osoby wciąż palącej. Spada też ryzyko raka jamy ustnej, gardła, przełyku, pęcherza, nerki i trzustki. Twoje komórki się odnawiają i są zdrowsze niż kiedykolwiek.</div>
+          <div class="milestone-organs">
+            <span class="organ-tag">🫁 Płuca −50% ryzyka</span>
+            <span class="organ-tag">🧬 Komórki</span>
+          </div>
+          <div class="milestone-progress"><div class="milestone-progress-bar" style="width: 92%"></div></div>
+        </div>
+      </div>
+
+      <div class="milestone">
+        <div class="milestone-dot"></div>
+        <div class="milestone-card">
+          <div class="milestone-icon">👑 <span class="icon-label">Pełna regeneracja</span></div>
+          <div class="milestone-time">Po 15 latach</div>
+          <div class="milestone-title">Serce jak u osoby, która nigdy nie paliła</div>
+          <div class="milestone-body">Ryzyko choroby wieńcowej jest takie samo jak u osoby niepalącej. Twoje ciało zakończyło pełny cykl regeneracji układu sercowo-naczyniowego. To Twoje zwycięstwo — trwałe, niezaprzeczalne i zasłużone.</div>
+          <div class="milestone-organs">
+            <span class="organ-tag">❤️ Serce = niepalący</span>
+            <span class="organ-tag">🏆 Zwycięstwo</span>
+          </div>
+          <div class="milestone-progress"><div class="milestone-progress-bar" style="width: 100%"></div></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ CALCULATOR ═══ -->
+  <section class="calculator-section" id="kalkulator">
+    <div class="calculator-container">
+      <h2 class="section-title">Sprawdź, co już osiągnąłeś</h2>
+      <p class="section-subtitle">Podaj datę, kiedy wypaliłeś ostatniego papierosa, a pokażemy Ci, jak daleko już zaszedłeś.</p>
+
+      <div class="input-group">
+        <label for="quit-date">Kiedy rzuciłeś/aś palenie?</label>
+        <div class="date-input-wrapper">
+          <input type="date" id="quit-date" />
+        </div>
+      </div>
+
+      <div style="text-align: center;">
+        <button class="calc-button" onclick="calculate()">Pokaż moje osiągnięcia</button>
+      </div>
+
+      <div class="results" id="results" style="display:none;">
+        <div class="results-header">
+          <div class="big-time" id="big-time"></div>
+          <div class="subtitle">bez papierosa — i każda sekunda się liczy</div>
+        </div>
+
+        <div class="stats-bar" id="stats-bar"></div>
+
+        <div class="results-grid" id="results-grid"></div>
+
+        <div class="encouragement" id="encouragement"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>BezDymu &mdash; wspieramy Cię na drodze do życia bez papierosa.</p>
+    <p style="margin-top: 0.5rem;">Dane oparte na badaniach WHO, American Cancer Society i NHS.</p>
+  </footer>
+
+  <script>
+    // ─── Timeline scroll animation ───
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.milestone').forEach((m) => observer.observe(m));
+
+    // ─── Set default date to today ───
+    const today = new Date();
+    document.getElementById('quit-date').value = today.toISOString().split('T')[0];
+
+    // ─── Milestones data ───
+    const milestones = [
+      {
+        minutes: 20,
+        icon: '💓',
+        title: 'Tętno i ciśnienie wróciły do normy',
+        desc: 'Twoje serce już nie musi pracować tak ciężko. Krążenie w dłoniach i stopach poprawiło się — organizm odetchnął z ulgą.',
+        short: '20 minut'
+      },
+      {
+        minutes: 480,
+        icon: '🫁',
+        title: 'Poziom tlenu we krwi wrócił do normy',
+        desc: 'Tlenek węgla spadł o połowę. Twoje organy wreszcie dostają tyle tlenu, ile potrzebują. Mózg pracuje sprawniej, masz więcej energii.',
+        short: '8 godzin'
+      },
+      {
+        minutes: 1440,
+        icon: '❤️',
+        title: 'Tlenek węgla całkowicie usunięty',
+        desc: 'Twoja krew jest czysta. Ryzyko zawału zaczyna spadać. Płuca rozpoczęły oczyszczanie ze śluzu i resztek smoły.',
+        short: '24 godziny'
+      },
+      {
+        minutes: 2880,
+        icon: '👃',
+        title: 'Smak i zapach wracają',
+        desc: 'Zakończenia nerwowe w nosie i ustach się odradzają. Kawa smakuje lepiej, świat pachnie intensywniej. Nikotyna opuściła Twoje ciało.',
+        short: '48 godzin'
+      },
+      {
+        minutes: 4320,
+        icon: '🌬️',
+        title: 'Oddychanie stało się łatwiejsze',
+        desc: 'Oskrzela rozluźniły się i rozszerzyły. Pojemność płuc rośnie. Możesz wejść po schodach bez zadyszki.',
+        short: '72 godziny'
+      },
+      {
+        minutes: 20160,
+        icon: '🏃',
+        title: 'Krążenie działa sprawniej',
+        desc: 'Układ krążenia się poprawił. Aktywność fizyczna jest łatwiejsza, skóra ma zdrowszy koloryt, rany goją się szybciej.',
+        short: '2 tygodnie'
+      },
+      {
+        minutes: 129600,
+        icon: '💪',
+        title: 'Płuca odzyskały do 30% wydajności',
+        desc: 'Rzęski w drogach oddechowych odrodziły się i znów oczyszczają płuca. Kaszel i duszność ustępują. Masz więcej tchu!',
+        short: '3 miesiące'
+      },
+      {
+        minutes: 388800,
+        icon: '🛡️',
+        title: 'Koniec z kaszlem palacza',
+        desc: 'Płuca są znacząco odbudowane. Oddech jest czysty i głęboki. Odporność wróciła — przeziębienia zdarzają się rzadziej.',
+        short: '9 miesięcy'
+      },
+      {
+        minutes: 525600,
+        icon: '🎉',
+        title: 'Ryzyko chorób serca spadło o 50%',
+        desc: 'To wielki kamień milowy! Twoje naczynia krwionośne są zdrowsze, serce pracuje sprawniej. Jesteś w połowie drogi do serca niepalącego.',
+        short: '1 rok'
+      },
+      {
+        minutes: 2628000,
+        icon: '⭐',
+        title: 'Ryzyko udaru jak u niepalącego',
+        desc: 'Naczynia krwionośne wróciły do normalnej funkcji. Ryzyko udaru mózgu spadło do poziomu osoby, która nigdy nie paliła.',
+        short: '5 lat'
+      },
+      {
+        minutes: 5256000,
+        icon: '🏆',
+        title: 'Ryzyko raka płuc spadło o połowę',
+        desc: 'Spada też ryzyko raka jamy ustnej, gardła, przełyku, pęcherza i trzustki. Twoje komórki się odnawiają.',
+        short: '10 lat'
+      },
+      {
+        minutes: 7884000,
+        icon: '👑',
+        title: 'Serce jak u osoby, która nigdy nie paliła',
+        desc: 'Pełna regeneracja układu sercowo-naczyniowego. To Twoje trwałe, niezaprzeczalne i zasłużone zwycięstwo.',
+        short: '15 lat'
+      }
+    ];
+
+    // ─── Encouragement messages ───
+    function getEncouragement(elapsedMinutes) {
+      if (elapsedMinutes < 60) return {
+        text: 'Właśnie zaczynasz najważniejszą podróż w swoim życiu!',
+        sub: 'Każda minuta bez papierosa to prezent dla Twojego ciała. Trzymaj się — pierwsze godziny są najtrudniejsze, ale Twój organizm już się regeneruje.'
+      };
+      if (elapsedMinutes < 1440) return {
+        text: 'Pierwszy dzień to najtrudniejszy dzień. I Ty go wygrywasz!',
+        sub: 'Twoje ciało już zaczęło się leczyć. Każda godzina to kolejny krok. Jutro będzie łatwiej.'
+      };
+      if (elapsedMinutes < 4320) return {
+        text: 'Przetrwałeś najtrudniejszy etap odstawienia nikotyny!',
+        sub: 'Fizyczne uzależnienie słabnie z każdą godziną. To, co czujesz, to Twoje ciało, które wraca do zdrowia. Jesteś silniejszy/a niż myślisz.'
+      };
+      if (elapsedMinutes < 20160) return {
+        text: 'Pierwszy tydzień za Tobą — to ogromne osiągnięcie!',
+        sub: 'Najgorsze jest za Tobą. Twój organizm przechodzi niesamowitą transformację. Każdy kolejny dzień jest łatwiejszy.'
+      };
+      if (elapsedMinutes < 43200) return {
+        text: 'Jesteś już wolny/a od fizycznego uzależnienia!',
+        sub: 'Twoje ciało nie potrzebuje już nikotyny. Teraz chodzi o nawyki i przyzwyczajenia — a te też pokonasz.'
+      };
+      if (elapsedMinutes < 129600) return {
+        text: 'Miesiące bez dymu — Twoje zdrowie rozkwita!',
+        sub: 'Widzisz różnicę? Lepszy oddech, więcej energii, zdrowsza skóra. To dopiero początek korzyści.'
+      };
+      if (elapsedMinutes < 525600) return {
+        text: 'Zbliżasz się do roku bez papierosa!',
+        sub: 'To, co robisz, wymaga prawdziwej siły. Twoje ciało Ci dziękuje każdego dnia. Nie poddawaj się!'
+      };
+      if (elapsedMinutes < 2628000) return {
+        text: 'Ponad rok bez papierosa — jesteś inspiracją!',
+        sub: 'Ryzyko chorób serca spadło o połowę. Jesteś dowodem na to, że można. Każdy dzień to kolejne zwycięstwo.'
+      };
+      return {
+        text: 'Jesteś bohaterem swojego zdrowia!',
+        sub: 'Lata bez papierosa. Twoje ciało prawie całkowicie się zregenerowało. Twoja decyzja uratowała Ci życie — dosłownie.'
+      };
+    }
+
+    // ─── Format duration ───
+    function formatDuration(minutes) {
+      const years = Math.floor(minutes / 525600);
+      const months = Math.floor((minutes % 525600) / 43200);
+      const days = Math.floor((minutes % 43200) / 1440);
+      const hours = Math.floor((minutes % 1440) / 60);
+      const mins = Math.floor(minutes % 60);
+
+      const parts = [];
+      if (years > 0) parts.push(`${years} ${pluralize(years, 'rok', 'lata', 'lat')}`);
+      if (months > 0) parts.push(`${months} ${pluralize(months, 'miesiąc', 'miesiące', 'miesięcy')}`);
+      if (days > 0) parts.push(`${days} ${pluralize(days, 'dzień', 'dni', 'dni')}`);
+      if (hours > 0 && years === 0) parts.push(`${hours} ${pluralize(hours, 'godzina', 'godziny', 'godzin')}`);
+      if (mins > 0 && years === 0 && months === 0) parts.push(`${mins} ${pluralize(mins, 'minuta', 'minuty', 'minut')}`);
+
+      return parts.join(', ') || '0 minut';
+    }
+
+    function pluralize(n, one, few, many) {
+      if (n === 1) return one;
+      const mod10 = n % 10;
+      const mod100 = n % 100;
+      if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return few;
+      return many;
+    }
+
+    function formatCountdown(minutes) {
+      if (minutes < 60) return `jeszcze ${Math.ceil(minutes)} min`;
+      if (minutes < 1440) return `jeszcze ${Math.ceil(minutes / 60)} godz.`;
+      if (minutes < 43200) return `jeszcze ${Math.ceil(minutes / 1440)} dni`;
+      if (minutes < 525600) return `jeszcze ${Math.round(minutes / 43200)} mies.`;
+      return `jeszcze ${Math.round(minutes / 525600)} ${pluralize(Math.round(minutes / 525600), 'rok', 'lata', 'lat')}`;
+    }
+
+    // ─── Calculate ───
+    function calculate() {
+      const dateVal = document.getElementById('quit-date').value;
+      if (!dateVal) {
+        alert('Podaj datę, kiedy rzuciłeś/aś palenie.');
+        return;
+      }
+
+      const quitDate = new Date(`${dateVal}T00:00`);
+      const now = new Date();
+      const diffMs = now - quitDate;
+
+      if (diffMs < 0) {
+        alert('Ta data jest w przyszłości. Podaj datę, kiedy rzuciłeś/aś palenie.');
+        return;
+      }
+
+      const elapsedMinutes = diffMs / 60000;
+      const resultsEl = document.getElementById('results');
+      resultsEl.style.display = 'block';
+
+      document.getElementById('big-time').textContent = formatDuration(elapsedMinutes);
+
+      const achieved = milestones.filter(m => elapsedMinutes >= m.minutes);
+      const upcoming = milestones.filter(m => elapsedMinutes < m.minutes);
+
+      // Stats
+      const statsBar = document.getElementById('stats-bar');
+      const totalHours = Math.floor(elapsedMinutes / 60);
+      const cigsAvoided = Math.floor(elapsedMinutes / 45);
+      const moneySaved = (cigsAvoided * 1.2).toFixed(0);
+      const lifeMinsGained = cigsAvoided * 11;
+
+      statsBar.innerHTML = `
+        <div class="stat-item">
+          <div class="stat-number">${cigsAvoided.toLocaleString('pl-PL')}</div>
+          <div class="stat-label">papierosów niewypalonych</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">${Number(moneySaved).toLocaleString('pl-PL')} zł</div>
+          <div class="stat-label">zaoszczędzonych pieniędzy</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">${formatDuration(lifeMinsGained)}</div>
+          <div class="stat-label">odzyskanego życia</div>
+        </div>
+      `;
+
+      // Results grid
+      const grid = document.getElementById('results-grid');
+      grid.innerHTML = '';
+
+      const allMilestones = [
+        ...achieved.map(m => ({ ...m, isAchieved: true })),
+        ...upcoming.map(m => ({ ...m, isAchieved: false }))
+      ];
+
+      allMilestones.forEach((m, i) => {
+        const card = document.createElement('div');
+        card.className = `result-card ${m.isAchieved ? 'achieved' : 'upcoming'}`;
+
+        const remaining = m.minutes - elapsedMinutes;
+
+        card.innerHTML = `
+          <div class="result-icon">${m.icon}</div>
+          <div class="result-label">${m.isAchieved ? '✓ Osiągnięte' : 'Przed Tobą'} — ${m.short}</div>
+          <div class="result-title">${m.title}</div>
+          <div class="result-desc">${m.desc}</div>
+          ${m.isAchieved
+            ? '<div class="result-badge">Zrobione!</div>'
+            : `<div class="result-countdown">${formatCountdown(remaining)}</div>`
+          }
+        `;
+
+        grid.appendChild(card);
+
+        setTimeout(() => card.classList.add('show'), 80 * i);
+      });
+
+      // Encouragement
+      const enc = getEncouragement(elapsedMinutes);
+      document.getElementById('encouragement').innerHTML = `
+        <div class="encouragement-text">${enc.text}</div>
+        <div class="encouragement-sub">${enc.sub}</div>
+      `;
+
+      resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  </script>
+
+</body>
+</html>
